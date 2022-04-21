@@ -24,7 +24,7 @@
 }
 @font-face {
   font-family: "Roboto-500";
-  font-style: medium;
+  font-style: normal;
   font-weight: 500;
   font-display: swap;
   src: url("./roboto-500.woff2") format("woff2"),

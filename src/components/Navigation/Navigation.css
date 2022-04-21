@@ -9,6 +9,9 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   align-items: center;
 }
+.navigation_type_save-articles{
+  background-color: white;
+}
 .navigation__list{
   list-style: none;
   padding: 0px;
@@ -17,6 +20,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  position: relative;
 
 }
 .navigation__title{
@@ -28,6 +32,9 @@
   color: #FFFFFF;
   padding-left: 104px;
 
+}
+.navigation__title_type_saved-articles{
+  color: black;
 }
 .navigation__button{
   box-sizing: border-box;
@@ -60,16 +67,20 @@
 }
 .navigation__link{
   margin-right:42px;
-display: flex;
-align-items: center;
-justify-content: center;
- font-family: 'Roboto-500',sans-serif;
- font-style: normal;
- font-weight: 500;
- font-size: 18px;
- line-height: 24px;
- text-decoration: none;
- height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Roboto-500',sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  text-decoration: none;
+  height: 80px;
+  background-color: transparent;
+  border: none;
+  padding: 0px;
+  cursor: pointer;
 }
 .navigation__link_type_logged-in{
   margin-right:70px;
@@ -106,6 +117,7 @@ justify-content: center;
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
+    position: relative;
 }
 
 @media screen and (max-width:1150px) {
@@ -126,7 +138,7 @@ justify-content: center;
   }
   .navigation__link{
     margin-right: 16px;
-    height: 66px;
+    height: 56px;
     font-size: 16px;
   }
   .navigation__button{
@@ -161,6 +173,17 @@ justify-content: center;
     justify-content: flex-start;
     align-items: flex-start;
     position: absolute;
+
+  }
+  .navigation_type_pseudo-style::before{
+    content:" ";
+    position: fixed;
+    opacity: 0.3;
+    background-color: #2a2c2f;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 
   }
   .navigation__list{
@@ -205,11 +228,21 @@ justify-content: center;
     min-height: 260px;
     background-color:#1A1B22
   }
+  .navigation__button_logged-in{
+    width: 180px;
+
+  }
 }
 @media screen and (max-width:320px) {
   .navigation__list{
 
     margin: 0px auto;
+  }
+  .navigation__title{
+    padding-left:16px ;
+  }
+  .navigation__menuButton{
+    padding-right: 16px;
   }
 
 }
