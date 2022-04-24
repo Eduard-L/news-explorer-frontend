@@ -1,0 +1,23 @@
+.notFound__title{
+  margin-top:30px;
+  margin-bottom: 0px;
+  font-family: 'Roboto-slab',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 30px;
+  text-align: center;
+  color: #1A1B22;
+}
+.notFound__subtitle{
+  font-family: 'Roboto',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: center;
+  color: #B6BCBF;
+  max-width: 250px;
+  margin-top: 16px;
+  margin-bottom: 0px;
+}

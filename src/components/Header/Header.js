@@ -3,7 +3,7 @@ import './Header.css'
 import { Navigation } from '../Navigation/Navigation'
 
 
-export function Header({ isLoggedIn, onClick, isBurgerMenuOpen, setIsBurgerMenuOpen, setIsBurgerMenuOpenisHomePageOpen, setIsHomePageOpen, isSaveArticlesPageIsOpen, setIsSaveArticlesPageIsOpen }) {
+export function Header({ isLoggedIn, onClick, isBurgerMenuOpen, setIsBurgerMenuOpen, isHomePageOpen, setIsHomePageOpen, isSaveArticlesPageIsOpen, setIsSaveArticlesPageIsOpen }) {
 
 
   return (
@@ -13,10 +13,11 @@ export function Header({ isLoggedIn, onClick, isBurgerMenuOpen, setIsBurgerMenuO
         onClick={onClick}
         isBurgerMenuOpen={isBurgerMenuOpen}
         setIsBurgerMenuOpen={setIsBurgerMenuOpen}
-        setIsBurgerMenuOpenisHomePageOpen={setIsBurgerMenuOpenisHomePageOpen}
+        isHomePageOpen={isHomePageOpen}
         setIsHomePageOpen={setIsHomePageOpen}
         isSaveArticlesPageIsOpen={isSaveArticlesPageIsOpen}
         setIsSaveArticlesPageIsOpen={setIsSaveArticlesPageIsOpen}
+
       />
       <div className='header__content'>
 

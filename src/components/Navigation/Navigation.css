@@ -11,6 +11,7 @@
 }
 .navigation_type_save-articles{
   background-color: white;
+  border-bottom: 1px solid #D1D2D6;
 }
 .navigation__list{
   list-style: none;
@@ -58,6 +59,10 @@
   padding-right: 20px;
   padding-left: 20px;
 }
+.navigation__button_color_black{
+  border: 1px solid black;
+  color: black;
+}
 .navigation__button_logged-in{
   min-width: 112px;
 
@@ -96,6 +101,12 @@
   box-sizing: border-box;
   border-bottom:3px solid white ;
 }
+.navigation__link_color_black{
+  color: black;
+}
+.navigation__link_borderB_black{
+  border-bottom: 3px solid black;
+}
 .navigation__menuButton{
   height: 24px;
   width: 24px;
@@ -107,12 +118,14 @@
 }
 .navigation__menuButton_type_burger{
   background-image: url('../../images/burgerLogo.svg');
-
+}
+.navigation__menuButton_type_blackBurger{
+  background-image: url('../../images/burgerBlack.svg');
 }
 .navigation__menuButton_type_closeMenu{
   background-image: url('../../images/Xicon.svg');
 }
-.wrapper{
+.navigation__wrapper{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -201,17 +214,17 @@
     margin-top: 20px;
 
   }
-  .wrapper{
+  .navigation__wrapper{
     align-items: center;
     min-height: 56px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2); ;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   }
   .navigation__link{
     height: 27px;
     margin-left:16px;
     margin-right: 0px;
-   justify-content: flex-start;
-   margin-top: 20px;
+    justify-content: flex-start;
+    margin-top: 20px;
   }
   .navigation__list_isOpen{
     display: flex;
