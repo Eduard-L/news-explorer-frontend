@@ -2,7 +2,7 @@
 import './App.css';
 import { Header } from '../Header/Header'
 import { useNavigate } from 'react-router';
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Footer } from '../Footer/Footer';
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { Main } from '../Main/Main'
@@ -14,6 +14,23 @@ import { testData } from '../../utils/data'
 
 
 function App() {
+
+  const [isLoggedIn, setIsLoggedIn] = useState(true)
+  const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false)
+  const [isHomePageOpen, setIsHomePageOpen] = useState(true)
+  const [isSaveArticlesPageIsOpen, setIsSaveArticlesPageIsOpen] = useState(false)
+  const [isPopupWithFormOpen, setIsPopupWithFormOpen] = useState(false)
+  const [isSignUpOpen, setIsSignUpOpen] = useState(false)
+  const [isSignInOpen, setIsSignInOpen] = useState(true)
+  const [isPopupWithMessageOpen, setIsPopupWithMessageOpen] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [cardsData, setCardsData] = useState([])
+  const [savedCardsData, setSavedCardsData] = useState(testData)
+  const [isCardHover, setIsCardHover] = useState(false)
+  const [allCardsData, setAllCardsData] = useState(testData)
+  const [counterOne, setCounterOne] = useState(6)
+
+
   const navigator = useNavigate()
 
   function handleHeaderButtonClick() {
@@ -43,24 +60,34 @@ function App() {
     setIsSignUpOpen(!isSignUpOpen)
   }
   function hanldeDisplayCards() {
+    let cardsToRender = []
+    for (let i = 0; i < counterOne; i++) {
+      if (testData[i]) {
+        cardsToRender.push(testData[i])
+      }
 
+    }
+
+    setCounterOne(counterOne + 3)
+    setCardsData(cardsToRender)
   }
 
 
+  useEffect(() => {
 
-  const [isLoggedIn, setIsLoggedIn] = useState(true)
-  const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false)
-  const [isHomePageOpen, setIsHomePageOpen] = useState(true)
-  const [isSaveArticlesPageIsOpen, setIsSaveArticlesPageIsOpen] = useState(false)
-  const [isPopupWithFormOpen, setIsPopupWithFormOpen] = useState(false)
-  const [isSignUpOpen, setIsSignUpOpen] = useState(false)
-  const [isSignInOpen, setIsSignInOpen] = useState(true)
-  const [isPopupWithMessageOpen, setIsPopupWithMessageOpen] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
-  const [cardsData, setCardsData] = useState([testData[1], testData[2], testData[3]])
-  const [savedCardsData, setSavedCardsData] = useState(testData)
-  const [isCardHover, setIsCardHover] = useState(false)
-  const [allCardsData, setAllCardsData] = useState(testData)
+    if (cardsData === []) return
+    function renderCards() {
+      let cardsToRender = []
+
+      for (let i = 0; i < 3; i++) {
+        if (!testData[i]) return
+        cardsToRender.push(testData[i])
+      }
+      setCardsData(cardsToRender)
+    }
+    renderCards()
+
+  }, [])
 
 
   return (
@@ -90,7 +117,7 @@ function App() {
             isSaveArticlesPageIsOpen={isSaveArticlesPageIsOpen}
             setIsHomePageOpen={setIsHomePageOpen}
             setIsSaveArticlesPageIsOpen={setIsSaveArticlesPageIsOpen}
-
+            allCardsData={allCardsData}
           />
 
 

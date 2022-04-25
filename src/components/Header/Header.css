@@ -57,6 +57,9 @@
 .header__input::placeholder{
   color:#B6BCBF ;
 }
+.header__input:focus{
+  outline: none;
+}
 .header__button{
   margin-left: -60px;
   border-radius: 100px;

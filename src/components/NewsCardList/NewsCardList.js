@@ -3,7 +3,9 @@ import { PreLoader } from '../PreLoader/PreLoader'
 import { NotFoundCards } from '../NotFoundCards/NotFoundCards'
 import { NewsCard } from '../NewsCard/NewsCard'
 
-export function NewsCardList({ isSaveArticlesPageIsOpen, isHomePageOpen, onClick, isLoggedIn, isLoading, cardsData, isCardHover, setIsCardHover }) {
+export function NewsCardList({ allCardsData, isSaveArticlesPageIsOpen, isHomePageOpen, onClick, isLoggedIn, isLoading, cardsData, isCardHover, setIsCardHover }) {
+
+
   return (
     <section className='cards'>
       {
@@ -14,13 +16,18 @@ export function NewsCardList({ isSaveArticlesPageIsOpen, isHomePageOpen, onClick
               <div className='cards__wrapper'>
                 {
                   cardsData.map((card) => {
+
                     return (
                       <NewsCard isSaveArticlesPageIsOpen={isSaveArticlesPageIsOpen} isHomePageOpen={isHomePageOpen} isLoggedIn={isLoggedIn} key={card.id} isCardHover={isCardHover} setIsCardHover={setIsCardHover} imgSrc={card.img} cardDate={card.date} cardTitle={card.title} cardSubtitle={card.subtitle} cardCaption={card.caption} />
                     )
                   })
                 }
               </div>
-              <button onClick={() => onClick()} className='cards__button-show-more' type='button'>Show more</button>
+              {
+
+                allCardsData.length !== cardsData.length &&
+                <button onClick={() => onClick()} className='cards__button-show-more' type='button'>Show more</button>
+              }
 
             </>
             : <NotFoundCards text='Sorry, but nothing matched your search terms.' />
