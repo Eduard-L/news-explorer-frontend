@@ -4,11 +4,11 @@ import { NotFoundCards } from '../NotFoundCards/NotFoundCards'
 
 export function SavedNewsList({ savedCardsData, isSaveArticlesPageIsOpen, isHomePageOpen, isLoggedIn, isCardHover, setIsCardHover }) {
   return (
-    <section className='cards'>
+    <section className='cards cards_type_saved-articles'>
       {
         savedCardsData ?
           <>
-            <div className='cards__wrapper'>
+            <div className='cards__wrapper cards__wrapper_type_saved-articles'>
               {
                 savedCardsData.map((card) => {
                   return (
