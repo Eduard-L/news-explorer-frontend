@@ -23,7 +23,7 @@ export function NewsCardList({ isSaveArticlesPageIsOpen, isHomePageOpen, onClick
               <button onClick={() => onClick()} className='cards__button-show-more' type='button'>Show more</button>
 
             </>
-            : <NotFoundCards />
+            : <NotFoundCards text='Sorry, but nothing matched your search terms.' />
       }
 
 

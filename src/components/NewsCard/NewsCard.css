@@ -2,9 +2,31 @@
 
   max-width: 400px;
   background-color: white;
-  border-radius: 30px;
+  border-radius: 10px;
   cursor: pointer;
   position: relative;
+}
+.card__keyword{
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  background-color: white;
+  height: 40px;
+  width: 87px;
+  padding: 8px 22px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  font-family: 'Roboto-500',sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  text-align: center;
+  color: #000000;
+
+
 }
 .card__button{
   position: absolute;
@@ -19,6 +41,9 @@
   background-position: center;
   cursor: pointer;
   background-color: white;
+}
+.card__button_type_saved-cards{
+  background-image: url('../../images/trashicon.svg');
 }
 .card__button_is-clicked{
   background-image: url('../../images/card-button3.svg');
@@ -57,8 +82,8 @@
 }
 .card__image{
   width: 100%;
-  border-top-left-radius:  30px;
-  border-top-right-radius:  30px;
+  border-top-left-radius:  10px;
+  border-top-right-radius:  10px;
 }
 .card__date{
   margin:0;
@@ -109,6 +134,8 @@
   }
   .card__message{
     padding: 13px 10px;
+    top: 8px;
+    right: 51px
   }
 
   .card__text-wrapper{
@@ -128,6 +155,14 @@
     -webkit-box-orient: vertical;
 
   }
+  .card__button{
+    top:8px;
+    right: 8px;
+  }
+  .card__keyword{
+    top: 8px;
+    left: 8px;
+  }
 }
 @media screen and (max-width:770px) {
   .card__subtitle{
@@ -136,11 +171,13 @@
   .card__caption{
     margin-top:12px;
   }
-}
-@media screen and (max-width:770px) {
   .card{
     max-width: 288px;
   }
+
+}
+@media screen and (max-width:770px) {
+
 }
 @media screen and (max-width:320px) {
   .card__title{
@@ -157,5 +194,13 @@
   }
   .card__caption{
     margin-top: 8px;
+  }
+  .card__button{
+    top:16px;
+    right: 16px;
+  }
+  .card__keyword{
+    top: 16px;
+    left: 16px;
   }
 }

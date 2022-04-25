@@ -10,8 +10,7 @@ import { SavedNews } from '../SavedNews/SavedNews'
 import { PopupWithForm } from '../PopupWithForm/PopupWithForm';
 import { Popup } from '../Popup/Popup'
 import { testData } from '../../utils/data'
-import { NewsCardList } from '../NewsCardList/NewsCardList'
-import { About } from '../About/About'
+
 
 
 function App() {
@@ -44,12 +43,9 @@ function App() {
     setIsSignUpOpen(!isSignUpOpen)
   }
   function hanldeDisplayCards() {
-    setPreNumOfArticlesDisplayed(preNumOfArticlesDisplayed + 3)
-    setNumOfArticlesDisplayed(numOfArticlesDisplayed + 3)
-    for (let i = preNumOfArticlesDisplayed; i < numOfArticlesDisplayed; i++) {
-      setCardsData([cardsData, ...testData[i]])
-    }
+
   }
+
 
 
   const [isLoggedIn, setIsLoggedIn] = useState(true)
@@ -62,10 +58,11 @@ function App() {
   const [isPopupWithMessageOpen, setIsPopupWithMessageOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [cardsData, setCardsData] = useState([testData[1], testData[2], testData[3]])
-  const [savedCardsData, setSavedCardsData] = useState('')
+  const [savedCardsData, setSavedCardsData] = useState(testData)
   const [isCardHover, setIsCardHover] = useState(false)
-  const [preNumOfArticlesDisplayed, setPreNumOfArticlesDisplayed] = useState(0)
-  const [numOfArticlesDisplayed, setNumOfArticlesDisplayed] = useState(3)
+  const [allCardsData, setAllCardsData] = useState(testData)
+
+
   return (
     <div className="App">
 
@@ -82,24 +79,21 @@ function App() {
             setIsSaveArticlesPageIsOpen={setIsSaveArticlesPageIsOpen}
 
           />
-          <Main>
-            <NewsCardList
-              isLoggedIn={isLoggedIn}
-              isLoading={isLoading}
-              cardsData={cardsData}
-              isCardHover={isCardHover}
-              setIsCardHover={setIsCardHover}
-              onClick={hanldeDisplayCards}
-              isHomePageOpen={isHomePageOpen}
-              isSaveArticlesPageIsOpen={isSaveArticlesPageIsOpen}
-            />
-            <About
-              isHomePageOpen={isHomePageOpen}
-              setIsHomePageOpen={setIsHomePageOpen}
-              setIsSaveArticlesPageIsOpen={setIsSaveArticlesPageIsOpen}
+          <Main
+            isLoggedIn={isLoggedIn}
+            isLoading={isLoading}
+            cardsData={cardsData}
+            isCardHover={isCardHover}
+            setIsCardHover={setIsCardHover}
+            onClick={hanldeDisplayCards}
+            isHomePageOpen={isHomePageOpen}
+            isSaveArticlesPageIsOpen={isSaveArticlesPageIsOpen}
+            setIsHomePageOpen={setIsHomePageOpen}
+            setIsSaveArticlesPageIsOpen={setIsSaveArticlesPageIsOpen}
 
-            />
-          </Main>
+          />
+
+
 
 
           <PopupWithForm
@@ -136,11 +130,12 @@ function App() {
             setIsHomePageOpen={setIsHomePageOpen}
             isSaveArticlesPageIsOpen={isSaveArticlesPageIsOpen}
             setIsSaveArticlesPageIsOpen={setIsSaveArticlesPageIsOpen}
+            savedCardsData={savedCardsData}
           >
 
 
 
-          </SavedNews>} />
+            /</SavedNews>} />
         <Route path='*' element={<Navigate to='/' />} />
       </Routes>
       <Footer />

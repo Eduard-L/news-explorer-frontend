@@ -2,25 +2,33 @@ import './NewsCard.css'
 import { useRef } from 'react'
 
 
-export function NewsCard({ isSaveArticlesPageIsOpen, isLoggedIn, isCardHover, setIsCardHover, imgSrc, cardDate, cardTitle, cardSubtitle, cardCaption }) {
+export function NewsCard({ isSaveArticlesPageIsOpen, isHomePageOpen, isLoggedIn, isCardHover, setIsCardHover, imgSrc, cardDate, cardTitle, cardSubtitle, cardCaption, cardKeyWord }) {
   const button = useRef()
   const message = useRef()
   function handleBtnHover() {
-    if (isLoggedIn) return
-    setIsCardHover(!isCardHover)
-    message.current.classList.toggle(`card__message_is-visible`)
-    button.current.classList.toggle(`card__button_is-hover`)
+    if (!isLoggedIn && isHomePageOpen) {
+      setIsCardHover(!isCardHover)
+      message.current.classList.toggle(`card__message_is-visible`)
+      button.current.classList.toggle(`card__button_is-hover`)
+    }
+
   }
   function handleBtnClick() {
-    if (!isLoggedIn) return
-    button.current.classList.toggle(`card__button_is-clicked`)
+
+    if (isLoggedIn && isHomePageOpen) {
+      button.current.classList.toggle(`card__button_is-clicked`)
+    }
+
   }
 
 
 
   return (
     <article className='card'>
-      <button onClick={() => { handleBtnClick() }} onMouseLeave={() => handleBtnHover()} onMouseEnter={() => handleBtnHover()} ref={button} className='card__button' type='button'></button>
+
+      <button onClick={() => { handleBtnClick() }} onMouseLeave={() => handleBtnHover()} onMouseEnter={() => handleBtnHover()} ref={button} className={`card__button ${isSaveArticlesPageIsOpen && "card__button_type_saved-cards"}`} type='button'></button>
+
+      {isSaveArticlesPageIsOpen && <span className='card__keyword'>{cardKeyWord}</span>}
 
       <span ref={message} className='card__message'>Sign in to save articles</span>
 
