@@ -103,6 +103,10 @@
 }
 .navigation__link_color_black{
   color: black;
+  border-bottom: 3px solid transparent;
+  padding-top: 0px;
+
+
 }
 .navigation__link_borderB_black{
   border-bottom: 3px solid black;

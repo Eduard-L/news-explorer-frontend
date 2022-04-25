@@ -11,6 +11,9 @@ export function NewsCard({ isSaveArticlesPageIsOpen, isHomePageOpen, isLoggedIn,
       message.current.classList.toggle(`card__message_is-visible`)
       button.current.classList.toggle(`card__button_is-hover`)
     }
+    if (isLoggedIn && isSaveArticlesPageIsOpen) {
+      message.current.classList.toggle(`card__message_is-visible`)
+    }
 
   }
   function handleBtnClick() {
@@ -30,7 +33,7 @@ export function NewsCard({ isSaveArticlesPageIsOpen, isHomePageOpen, isLoggedIn,
 
       {isSaveArticlesPageIsOpen && <span className='card__keyword'>{cardKeyWord}</span>}
 
-      <span ref={message} className='card__message'>Sign in to save articles</span>
+      <span ref={message} className={`card__message ${isSaveArticlesPageIsOpen && 'card__message_type_save-articles'}`}>{isHomePageOpen ? 'Sign in to save articles' : 'Remove from saved'}</span>
 
       <img className='card__image' src={imgSrc} alt='news image' />
       <div className='card__text-wrapper'>

@@ -55,7 +55,7 @@
   position: absolute;
   padding: 13px 30px;
   top:24px;
-  right:69px;
+  right:66px;
   background-color: white;
   border-radius: 10px;
   font-family: 'Roboto-500',sans-serif;
@@ -127,11 +127,8 @@
 
 
 }
-@media screen and (max-width:1050px) {
-  .card{
-    max-width: 224px;
+@media screen and (max-width:1150px) {
 
-  }
   .card__message{
     padding: 13px 10px;
     top: 8px;
@@ -149,7 +146,6 @@
     height: 88px;
     text-overflow: ellipsis;
     overflow: hidden;
-    width: 192px;
     display: -webkit-box;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
@@ -164,6 +160,22 @@
     left: 8px;
   }
 }
+@media screen and (min-width:750px) and (max-width:950px) {
+  .card__message_type_save-articles{
+    top: 50px;
+    right:8px;
+
+  }
+
+}
+@media screen and (min-width:570px) and (max-width:670px) {
+  .card__message_type_save-articles{
+    top: 50px;
+    right:8px;
+
+  }
+
+}
 @media screen and (max-width:770px) {
   .card__subtitle{
     margin-top: 10px;
@@ -176,9 +188,7 @@
   }
 
 }
-@media screen and (max-width:770px) {
 
-}
 @media screen and (max-width:320px) {
   .card__title{
     margin-top: 10px;
@@ -202,5 +212,14 @@
   .card__keyword{
     top: 16px;
     left: 16px;
+  }
+  .card__message{
+    top: 16px;
+    right: 59px;
+  }
+  .card__message_type_save-articles{
+    top: 60px;
+    right:15px;
+
   }
 }
