@@ -9,7 +9,7 @@ export function SavedNewsList({ savedCardsData, isSaveArticlesPageIsOpen, isHome
         savedCardsData ?
           <>
             <div className='cards__wrapper cards__wrapper_type_saved-articles'>
-              {
+              {savedCardsData &&
                 savedCardsData.map((card) => {
                   return (
                     <NewsCard
@@ -17,6 +17,7 @@ export function SavedNewsList({ savedCardsData, isSaveArticlesPageIsOpen, isHome
                       isHomePageOpen={isHomePageOpen}
                       isLoggedIn={isLoggedIn}
                       key={card.id}
+                      card={card}
                       isCardHover={isCardHover}
                       setIsCardHover={setIsCardHover}
                       imgSrc={card.img}

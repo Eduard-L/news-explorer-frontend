@@ -2,11 +2,11 @@ import './NewsCard.css'
 import { useRef } from 'react'
 
 
-export function NewsCard({ isSaveArticlesPageIsOpen, isHomePageOpen, isLoggedIn, isCardHover, setIsCardHover, imgSrc, cardDate, cardTitle, cardSubtitle, cardCaption, cardKeyWord }) {
+export function NewsCard({ setCardToSave, card, isSaveArticlesPageIsOpen, isHomePageOpen, isLoggedIn, isCardHover, setIsCardHover, imgSrc, cardDate, cardTitle, cardSubtitle, cardCaption, cardKeyWord }) {
   const button = useRef()
   const message = useRef()
   function handleBtnHover() {
-    if (!isLoggedIn && isHomePageOpen) {
+    if (isHomePageOpen) {
       setIsCardHover(!isCardHover)
       message.current.classList.toggle(`card__message_is-visible`)
       button.current.classList.toggle(`card__button_is-hover`)
@@ -16,24 +16,26 @@ export function NewsCard({ isSaveArticlesPageIsOpen, isHomePageOpen, isLoggedIn,
     }
 
   }
-  function handleBtnClick() {
+  function handleBtnClick(e) {
 
     if (isLoggedIn && isHomePageOpen) {
-      button.current.classList.toggle(`card__button_is-clicked`)
+      e.target.classList.toggle(`card__button_is-clicked`)
     }
+    setCardToSave(card)
+
 
   }
 
 
 
   return (
-    <article className='card'>
+    <article className='card' onClick={(e) => { handleBtnClick(e) }}>
 
-      <button onClick={() => { handleBtnClick() }} onMouseLeave={() => handleBtnHover()} onMouseEnter={() => handleBtnHover()} ref={button} className={`card__button ${isSaveArticlesPageIsOpen && "card__button_type_saved-cards"}`} type='button'></button>
+      <button onMouseLeave={() => handleBtnHover()} onMouseEnter={() => handleBtnHover()} ref={button} className={`card__button ${isSaveArticlesPageIsOpen && "card__button_type_saved-cards"}`} type='button'></button>
 
       {isSaveArticlesPageIsOpen && <span className='card__keyword'>{cardKeyWord}</span>}
 
-      <span ref={message} className={`card__message ${isSaveArticlesPageIsOpen && 'card__message_type_save-articles'}`}>{isHomePageOpen ? 'Sign in to save articles' : 'Remove from saved'}</span>
+      <span ref={message} className={`card__message ${isSaveArticlesPageIsOpen && 'card__message_type_save-articles'}`}>{isHomePageOpen && isLoggedIn && 'Add to saved' || !isLoggedIn && isHomePageOpen && 'Sign in to save articles' || isSaveArticlesPageIsOpen && 'Remove from saved'}</span>
 
       <img className='card__image' src={imgSrc} alt='news image' />
       <div className='card__text-wrapper'>

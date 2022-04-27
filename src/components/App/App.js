@@ -29,6 +29,7 @@ function App() {
   const [isCardHover, setIsCardHover] = useState(false)
   const [allCardsData, setAllCardsData] = useState(testData)
   const [counterOne, setCounterOne] = useState(6)
+  const [cardToSave, setCardToSave] = useState({})
 
 
   const navigator = useNavigate()
@@ -74,7 +75,7 @@ function App() {
 
 
   useEffect(() => {
-
+    setAllCardsData(testData)
     if (cardsData === []) return
     function renderCards() {
       let cardsToRender = []
@@ -88,6 +89,12 @@ function App() {
     renderCards()
 
   }, [])
+  // useEffect(() => {
+  //   if (!cardToSave) return
+  //   setSavedCardsData([cardToSave, ...savedCardsData])
+
+
+  // }, [cardToSave])
 
 
   return (
@@ -118,6 +125,7 @@ function App() {
             setIsHomePageOpen={setIsHomePageOpen}
             setIsSaveArticlesPageIsOpen={setIsSaveArticlesPageIsOpen}
             allCardsData={allCardsData}
+            setCardToSave={setCardToSave}
           />
 
 
