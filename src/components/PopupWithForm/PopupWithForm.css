@@ -42,6 +42,22 @@
   background-color: #E6E8EB;
   color: #B6BCBF;
 }
+.popup__button_is-blinking {
+	text-decoration: blink;
+	animation-name: blinker;
+	animation-duration: 0.6s;
+	animation-iteration-count: infinite;
+	animation-timing-function: ease-in-out;
+	animation-direction: alternate;
+}
+@keyframes blinker {
+	from {
+		opacity: 1.0;
+	}
+	to {
+		opacity: 0.0;
+	}
+}
 .popup__input{
   margin-top: 8px;
   font-family: 'Inter',sans-serif;

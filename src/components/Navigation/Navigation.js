@@ -2,11 +2,13 @@ import './Navigation.css'
 import buttonLogoWhite from '../../images/buttonLogo2.svg'
 import buttonLogoBlack from '../../images/logOutBlack.svg'
 import { useNavigate } from 'react-router'
+import { useContext } from 'react'
+import { userDataContext } from '../../contexts/UserInfoContext'
 
 
-export function Navigation({ isLoggedIn, onClick, isBurgerMenuOpen, setIsBurgerMenuOpen, isHomePageOpen, setIsHomePageOpen, isSaveArticlesPageIsOpen, setIsSaveArticlesPageIsOpen }) {
+export function Navigation({ userDataErr, isLoggedIn, onClick, isBurgerMenuOpen, setIsBurgerMenuOpen, isHomePageOpen, setIsHomePageOpen, isSaveArticlesPageIsOpen, setIsSaveArticlesPageIsOpen }) {
   const navigation = useNavigate()
-
+  const userData = useContext(userDataContext)
   function handleHomeBtnClick() {
     setIsHomePageOpen(true)
     setIsSaveArticlesPageIsOpen(false)
@@ -40,7 +42,7 @@ export function Navigation({ isLoggedIn, onClick, isBurgerMenuOpen, setIsBurgerM
             <button onClick={() => { handleSavedArticlesBtnClick() }} type='button' className={`navigation__link_type_saved-articles navigation__link ${isSaveArticlesPageIsOpen && !isBurgerMenuOpen && 'navigation__link_color_black navigation__link_borderB_black'} ${isLoggedIn && 'navigation__link_logged-in'}`} >Saved articles</button>
           </li> : ''}
         <li className='navigation__item'>
-          <button onClick={() => onClick()} className={`navigation__button ${isSaveArticlesPageIsOpen && !isBurgerMenuOpen && 'navigation__button_color_black'} ${isLoggedIn && 'navigation__button_logged-in'}`} type='button'>{isLoggedIn ? 'Elise' : 'Sign in'}{isLoggedIn && <img src={!isBurgerMenuOpen && isSaveArticlesPageIsOpen ? buttonLogoBlack : buttonLogoWhite} alt="button logo"></img>} </button>
+          <button onClick={() => onClick()} className={`navigation__button ${isSaveArticlesPageIsOpen && !isBurgerMenuOpen && 'navigation__button_color_black'} ${isLoggedIn && 'navigation__button_logged-in'}`} type='button'><p className={`navigation__button-text ${userDataErr && 'navigation__button-text_is-red'}`}>{isLoggedIn && userData.name}{!isLoggedIn && !userDataErr && 'Sign in'} {userDataErr && 'Error'}</p>{isLoggedIn && <img src={!isBurgerMenuOpen && isSaveArticlesPageIsOpen ? buttonLogoBlack : buttonLogoWhite} alt="button logo"></img>} </button>
         </li>
       </ul>
 

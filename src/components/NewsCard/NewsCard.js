@@ -2,9 +2,10 @@ import './NewsCard.css'
 import { useRef } from 'react'
 
 
-export function NewsCard({ setCardToSave, card, isSaveArticlesPageIsOpen, isHomePageOpen, isLoggedIn, isCardHover, setIsCardHover, imgSrc, cardDate, cardTitle, cardSubtitle, cardCaption, cardKeyWord }) {
+export function NewsCard({ cardToSave, setCardToSave, card, isSaveArticlesPageIsOpen, isHomePageOpen, isLoggedIn, isCardHover, setIsCardHover, imgSrc, cardDate, cardTitle, cardSubtitle, cardCaption, cardKeyWord }) {
   const button = useRef()
   const message = useRef()
+
   function handleBtnHover() {
     if (isHomePageOpen) {
       setIsCardHover(!isCardHover)
@@ -21,7 +22,7 @@ export function NewsCard({ setCardToSave, card, isSaveArticlesPageIsOpen, isHome
     if (isLoggedIn && isHomePageOpen) {
       e.target.classList.toggle(`card__button_is-clicked`)
     }
-    setCardToSave(card)
+    // setCardToSave([card, ...cardToSave])
 
 
   }

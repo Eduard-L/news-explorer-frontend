@@ -42,6 +42,7 @@ export function SavedNews({ savedCardsData, isLoggedIn, onClick, setIsHomePageOp
         setIsHomePageOpen={setIsHomePageOpen}
         isSaveArticlesPageIsOpen={isSaveArticlesPageIsOpen}
         setIsSaveArticlesPageIsOpen={setIsSaveArticlesPageIsOpen}
+        savedCardsData={savedCardsData}
       />
       <SavedNewsList
         isSaveArticlesPageIsOpen={isSaveArticlesPageIsOpen}

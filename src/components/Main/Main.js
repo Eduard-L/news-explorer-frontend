@@ -2,7 +2,7 @@ import './Main.css'
 import { NewsCardList } from '../NewsCardList/NewsCardList'
 import { About } from '../About/About'
 
-export function Main({ setCardToSave, allCardsData, setIsSaveArticlesPageIsOpen, setIsHomePageOpen, isLoggedIn, isLoading, cardsData, isCardHover, setIsCardHover, onClick, isHomePageOpen, isSaveArticlesPageIsOpen }) {
+export function Main({ cardToSave, setCardToSave, allCardsData, setIsSaveArticlesPageIsOpen, setIsHomePageOpen, isLoggedIn, isLoading, cardsData, isCardHover, setIsCardHover, onClick, isHomePageOpen, isSaveArticlesPageIsOpen }) {
   return (
     <main>
       <NewsCardList
@@ -16,6 +16,7 @@ export function Main({ setCardToSave, allCardsData, setIsSaveArticlesPageIsOpen,
         isSaveArticlesPageIsOpen={isSaveArticlesPageIsOpen}
         allCardsData={allCardsData}
         setCardToSave={setCardToSave}
+        cardToSave={cardToSave}
       />
 
 
