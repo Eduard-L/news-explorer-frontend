@@ -2,36 +2,76 @@ import './NewsCardList.css'
 import { PreLoader } from '../PreLoader/PreLoader'
 import { NotFoundCards } from '../NotFoundCards/NotFoundCards'
 import { NewsCard } from '../NewsCard/NewsCard'
+import { handleChageDateFormat } from '../../utils/constants'
 
-export function NewsCardList({ cardToSave, setCardToSave, allCardsData, isSaveArticlesPageIsOpen, isHomePageOpen, onClick, isLoggedIn, isLoading, cardsData, isCardHover, setIsCardHover }) {
+
+export function NewsCardList({ searchKeyWord, token, onSave, isCardClicked, setIsCardClicked, isSearchErrorOccured, isCardsBlockVisible, cardToSave, setCardToSave, allCardsData, isSaveArticlesPageIsOpen, isHomePageOpen, onClick, isLoggedIn, isLoading, cardsData, isCardHover, setIsCardHover }) {
+
 
 
   return (
-    <section className='cards'>
+
+    <section className={`cards ${isCardsBlockVisible && 'cards_is-visible'}`}>
       {
         isLoading ? <PreLoader /> :
-          cardsData ?
-            <>
-              <h2 className='cards__title'>Search Result</h2>
-              <div className='cards__wrapper'>
-                {
-                  cardsData.map((card) => {
+          <>
+            {
+              cardsData.length === 0 ? <NotFoundCards isSearchErrorOccured={isSearchErrorOccured} text={!isSearchErrorOccured ? 'Sorry, but nothing matched your search terms.' : "Sorry, something went wrong during the request. There may be a connection issue or the server may be down. Please try again later."} /> :
 
-                    return (
-                      <NewsCard cardToSave={cardToSave} setCardToSave={setCardToSave} card={card} isSaveArticlesPageIsOpen={isSaveArticlesPageIsOpen} isHomePageOpen={isHomePageOpen} isLoggedIn={isLoggedIn} key={card.id} isCardHover={isCardHover} setIsCardHover={setIsCardHover} imgSrc={card.img} cardDate={card.date} cardTitle={card.title} cardSubtitle={card.subtitle} cardCaption={card.caption} />
-                    )
-                  })
-                }
-              </div>
-              {
+                <>
+                  <h2 className='cards__title'>Search Result</h2>
+                  <div className='cards__wrapper'>
+                    {
+                      cardsData.map((card) => {
 
-                allCardsData.length !== cardsData.length &&
-                <button onClick={() => onClick()} className='cards__button-show-more' type='button'>Show more</button>
-              }
+                        return (
+                          <NewsCard
+                            token={token}
+                            onSave={onSave}
+                            isCardClicked={isCardClicked}
+                            setIsCardClicked={setIsCardClicked}
+                            cardToSave={cardToSave}
+                            setCardToSave={setCardToSave}
+                            card={card}
+                            isSaveArticlesPageIsOpen={isSaveArticlesPageIsOpen}
+                            isHomePageOpen={isHomePageOpen}
+                            isLoggedIn={isLoggedIn}
+                            key={card.id}
+                            isCardHover={isCardHover}
+                            setIsCardHover={setIsCardHover}
+                            imgSrc={card.urlToImage}
+                            cardDate={handleChageDateFormat(card.publishedAt)}
+                            cardTitle={card.title}
+                            cardSubtitle={card.description}
+                            cardCaption={card.source.name}
+                            cardLink={card.url}
+                            searchKeyWord={searchKeyWord}
+                          />
+                        )
+                      })
+                    }
+                  </div>
+                  {
 
-            </>
-            : <NotFoundCards text='Sorry, but nothing matched your search terms.' />
+                    allCardsData.length !== cardsData.length &&
+                    <button onClick={() => onClick()} className='cards__button-show-more' type='button'>Show more</button>
+                  }
+
+                </>
+
+
+            }
+
+          </>
+
+
       }
+
+
+
+
+
+
 
 
 

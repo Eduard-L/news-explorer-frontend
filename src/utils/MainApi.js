@@ -57,6 +57,46 @@ class MainApi {
     return this._checkResponse(response)
   }
 
+  async handleSaveArticle(keyWord, title, text, date, source, link, image, token) {
+    const response = await fetch(`${this.baseUrl}/articles`, {
+      method: 'POST',
+      headers: {
+        authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        "keyword": keyWord,
+        "title": title,
+        "text": text,
+        "date": date,
+        "source": source,
+        "link": link,
+        "image": image,
+      })
+    })
+    return this._checkResponse(response)
+  }
+
+  async handleGetSavedArticles(token) {
+    const response = await fetch(`${this.baseUrl}/articles`, {
+      method: 'GET',
+      headers: {
+        authorization: `Bearer ${token}`
+      }
+    })
+    return this._checkResponse(response)
+  }
+
+  async deleteArticle(token, id) {
+    const response = await fetch(`${this.baseUrl}/articles/${id}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: `Bearer ${token}`
+      }
+    })
+    return this._checkResponse(response)
+  }
+
 }
 
 

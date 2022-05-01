@@ -7,7 +7,7 @@ import { SavedNewsList } from '../SavedNewsList/SavedNewsList'
 
 
 
-export function SavedNews({ savedCardsData, isLoggedIn, onClick, setIsHomePageOpen, isHomePageOpen, isSaveArticlesPageIsOpen, setIsSaveArticlesPageIsOpen, setIsBurgerMenuOpen, isBurgerMenuOpen }) {
+export function SavedNews({ onDelete, savedCardsData, isLoggedIn, onClick, setIsHomePageOpen, isHomePageOpen, isSaveArticlesPageIsOpen, setIsSaveArticlesPageIsOpen, setIsBurgerMenuOpen, isBurgerMenuOpen }) {
   function handleCloseBurgerMenu() { // handler for closing the burger in bigger screen resolution in order not to lose the colors at the navigation bar  //
 
     if (window.screen.availWidth > 760) {
@@ -49,6 +49,7 @@ export function SavedNews({ savedCardsData, isLoggedIn, onClick, setIsHomePageOp
         savedCardsData={savedCardsData}
         isHomePageOpen={isHomePageOpen}
         isLoggedIn={isLoggedIn}
+        onDelete={onDelete}
       />
 
     </div>

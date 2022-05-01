@@ -9,18 +9,21 @@ import { Main } from '../Main/Main'
 import { SavedNews } from '../SavedNews/SavedNews'
 import { PopupWithForm } from '../PopupWithForm/PopupWithForm';
 import { Popup } from '../Popup/Popup'
-import { testData } from '../../utils/data'
 import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
 import { userDataContext } from '../../contexts/UserInfoContext';
 import mainApi from '../../utils/MainApi'
+import { currentDate, date7DaysAgo } from '../../utils/constants'
+import NewsApi from '../../utils/NewsApi';
+import uuid from 'react-uuid';
+
 
 
 
 function App() {
   const navigator = useNavigate()
+  // console.log(currentDate, date7DaysAgo)
 
-
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("jwt") !== null)
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false)
   const [isHomePageOpen, setIsHomePageOpen] = useState(true)
   const [isSaveArticlesPageIsOpen, setIsSaveArticlesPageIsOpen] = useState(false)
@@ -30,10 +33,10 @@ function App() {
   const [isPopupWithMessageOpen, setIsPopupWithMessageOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [cardsData, setCardsData] = useState([])
-  const [savedCardsData, setSavedCardsData] = useState(testData)
+  const [savedCardsData, setSavedCardsData] = useState([])
   const [isCardHover, setIsCardHover] = useState(false)
-  const [allCardsData, setAllCardsData] = useState(testData)
-  const [counterOne, setCounterOne] = useState(6)
+  const [allCardsData, setAllCardsData] = useState(JSON.parse(localStorage.getItem('cards')))
+  const [numCardsToRender, setNumCardsToRender] = useState(parseInt(localStorage.getItem('numOfArticlesRendered')) || 2)
   const [cardToSave, setCardToSave] = useState({})
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -43,9 +46,17 @@ function App() {
   const [isFormLoading, setIsFormLoading] = useState(false)
   const [token, setToken] = useState(localStorage.getItem("jwt"))
   const [userDataErr, setUserDataErr] = useState(false)
+  const [searchKeyWord, setSearchKeyWord] = useState(localStorage.getItem('lastKeyWord') || '')
+  const [isCardsBlockVisible, setIsCardBlockVisible] = useState(false)
+  const [isSearchErrorOccured, setIsSearchErrorOccured] = useState(false)
+  const [isCardClicked, setIsCardClicked] = useState(false)
 
 
-  useEffect(() => {
+
+
+
+
+  useEffect(() => {// check token validity just when there is token available
 
     if (!token) {
       console.log('token not valid')
@@ -63,12 +74,94 @@ function App() {
         }
       }
       catch (errorStatus) {
-        alert('something wrong with the server while receiving user data please try again', errorStatus)
+        alert('something wrong with the server while receiving user data please loggin again', errorStatus)
         setUserDataErr(true)
         setIsLoggedIn(false)
+        setUserData({})
+        localStorage.removeItem('jwt')
       }
     })()
+
   }, [token])
+
+  useEffect(() => {//get articles just when the user logged in
+    if (!isLoggedIn) return
+
+    (async function getArticles() {
+      try {
+
+        const userArticles = await mainApi.handleGetSavedArticles(token)
+        if (userArticles) {
+          setSavedCardsData(userArticles)
+        }
+      }
+      catch (e) {
+        alert('something went wrong while receiving articles')
+        console.log(e)
+      }
+    })()
+  }, [isLoggedIn])
+
+  async function deleteArticle(id) {
+    try {
+      const article = await mainApi.deleteArticle(token, id)
+      if (article) {
+        const newSavedArticles = savedCardsData.filter((item) => item._id !== article._id)
+        setSavedCardsData(newSavedArticles)
+      }
+
+    }
+    catch (e) {
+      alert('something went wrong while deleting card')
+    }
+  }
+
+
+
+  async function handleSaveArticle(keyWord, title, text, date, source, link, image, token) {
+    try {
+      const savedArticle = await mainApi.handleSaveArticle(keyWord, title, text, date, source, link, image, token)
+      if (savedArticle) {
+        setSavedCardsData([savedArticle, ...savedCardsData])
+      }
+    }
+    catch (errorStatus) {
+      alert('something went wrong while save the article')
+      console.log(errorStatus)
+    }
+  }
+
+
+
+
+
+  async function handleSubmitNewsSearch(e) {
+    e.preventDefault();
+    setIsCardBlockVisible(true)
+    setIsLoading(true)
+    setNumCardsToRender(2)
+    try {
+
+      const articles = await NewsApi.getArticles(searchKeyWord, date7DaysAgo, currentDate)
+      if (articles) {
+        setIsSearchErrorOccured(false)
+        const allArticles = articles.articles;
+        setAllCardsData(allArticles)
+        localStorage.setItem('cards', JSON.stringify(allArticles))
+        localStorage.setItem('numOfArticlesRendered', 2)
+        localStorage.setItem('lastKeyWord', searchKeyWord)
+      }
+
+    }
+    catch (e) {
+      setIsSearchErrorOccured(true)
+      setCardsData([])
+
+    }
+    finally {
+      setIsLoading(false)
+    }
+  }
 
   async function handlePopupFormSubmit(e) {
     e.preventDefault();
@@ -92,7 +185,7 @@ function App() {
       }
 
       catch (errorStatus) {
-        console.log(errorStatus)
+
 
         if (errorStatus === 409) {
           setGlobalErrorMessage('user already excist')
@@ -152,6 +245,7 @@ function App() {
       navigator('/')
       setUserDataErr(false)
       setUserData({})
+      setSavedCardsData([])
     }
     else {
       setIsPopupWithFormOpen(true)
@@ -178,34 +272,38 @@ function App() {
     setIsSignUpOpen(!isSignUpOpen)
   }
   function hanldeDisplayCards() {
-    let cardsToRender = []
-    for (let i = 0; i < counterOne; i++) {
-      if (testData[i]) {
-        cardsToRender.push(testData[i])
-      }
+    const numArticlesToRender = numCardsToRender + 3
+    localStorage.setItem('numOfArticlesRendered', numArticlesToRender)
+    setNumCardsToRender(numArticlesToRender)
 
-    }
-
-    setCounterOne(counterOne + 3)
-    setCardsData(cardsToRender)
   }
 
+  useEffect(() => { //first render after submiting search form
 
-  useEffect(() => {
-    setAllCardsData(testData)
-    if (cardsData === []) return
-    function renderCards() {
-      let cardsToRender = []
-
-      for (let i = 0; i < 3; i++) {
-        if (!testData[i]) return
-        cardsToRender.push(testData[i])
-      }
-      setCardsData(cardsToRender)
+    if (!allCardsData) {
+      setCardsData([])
+      return
     }
-    renderCards()
 
-  }, [])
+    let cardsToRender = []
+    let card;
+
+    for (let i = 0; i <= numCardsToRender; i++) {
+
+      if (allCardsData[i]) {
+        card = { ...allCardsData[i], id: uuid() }
+        cardsToRender.push(card)
+
+      }
+
+    }
+    setIsCardBlockVisible(true)
+    setCardsData(cardsToRender)
+
+  }, [allCardsData, numCardsToRender])
+
+
+
 
 
   return (
@@ -224,6 +322,9 @@ function App() {
               isSaveArticlesPageIsOpen={isSaveArticlesPageIsOpen}
               setIsSaveArticlesPageIsOpen={setIsSaveArticlesPageIsOpen}
               userDataErr={userDataErr}
+              onSubmit={handleSubmitNewsSearch}
+              setSearchKeyWord={setSearchKeyWord}
+              searchKeyWord={searchKeyWord}
 
             />
             <Main
@@ -240,6 +341,14 @@ function App() {
               allCardsData={allCardsData}
               setCardToSave={setCardToSave}
               cardToSave={cardToSave}
+              isCardsBlockVisible={isCardsBlockVisible}
+              isSearchErrorOccured={isSearchErrorOccured}
+              isCardClicked={isCardClicked}
+              setIsCardClicked={setIsCardClicked}
+              onSave={handleSaveArticle}
+              token={token}
+              searchKeyWord={searchKeyWord}
+
             />
 
 
@@ -290,6 +399,7 @@ function App() {
               isSaveArticlesPageIsOpen={isSaveArticlesPageIsOpen}
               setIsSaveArticlesPageIsOpen={setIsSaveArticlesPageIsOpen}
               savedCardsData={savedCardsData}
+              onDelete={deleteArticle}
             />} />
           <Route path='*' element={<Navigate to='/' />} />
         </Routes>
