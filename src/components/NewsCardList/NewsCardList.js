@@ -5,7 +5,7 @@ import { NewsCard } from '../NewsCard/NewsCard'
 import { handleChageDateFormat } from '../../utils/constants'
 
 
-export function NewsCardList({ searchKeyWord, token, onSave, isCardClicked, setIsCardClicked, isSearchErrorOccured, isCardsBlockVisible, cardToSave, setCardToSave, allCardsData, isSaveArticlesPageIsOpen, isHomePageOpen, onClick, isLoggedIn, isLoading, cardsData, isCardHover, setIsCardHover }) {
+export function NewsCardList({ setIsPopupWithFormOpen, setOnSuccessReq, onSuccessReq, savedCardsData, onDelete, searchKeyWord, token, onSave, isCardClicked, setIsCardClicked, isSearchErrorOccured, isCardsBlockVisible, cardToSave, setCardToSave, allCardsData, isSaveArticlesPageIsOpen, isHomePageOpen, onClick, isLoggedIn, isLoading, cardsData, isCardHover, setIsCardHover }) {
 
 
 
@@ -28,6 +28,7 @@ export function NewsCardList({ searchKeyWord, token, onSave, isCardClicked, setI
                           <NewsCard
                             token={token}
                             onSave={onSave}
+                            id={card._id}
                             isCardClicked={isCardClicked}
                             setIsCardClicked={setIsCardClicked}
                             cardToSave={cardToSave}
@@ -46,6 +47,12 @@ export function NewsCardList({ searchKeyWord, token, onSave, isCardClicked, setI
                             cardCaption={card.source.name}
                             cardLink={card.url}
                             searchKeyWord={searchKeyWord}
+                            onDelete={onDelete}
+                            savedCardsData={savedCardsData}
+                            cardsData={cardsData}
+                            onSuccessReq={onSuccessReq}
+                            setOnSuccessReq={setOnSuccessReq}
+                            setIsPopupWithFormOpen={setIsPopupWithFormOpen}
                           />
                         )
                       })

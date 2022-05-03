@@ -1,11 +1,25 @@
-const currentDate = `${new Date().getDate()}-${new Date().getMonth() + 1}-${new Date().getFullYear()}`;
 
+const currentDate = new Date().toISOString().split('T')[0]
 
 function getDateDaysAgo(days) {
   let date = new Date();
   date.setDate(date.getDate() - days)
+  let month = date.getMonth() + 1;
+  let day = date.getDate()
 
-  return `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`
+
+  if (day < 10) {
+    day = day.toString()
+    day = '0' + day
+  }
+  if (month < 10) {
+    month = month.toString()
+    month = '0' + month;
+  }
+
+
+
+  return `${date.getFullYear()}-${month}-${day}`
 }
 function handleChageDateFormat(date) {
   let dateOfArticle = [...date.slice(0, 10)];

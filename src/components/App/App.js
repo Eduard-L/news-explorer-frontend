@@ -19,9 +19,11 @@ import uuid from 'react-uuid';
 
 
 
+
+
 function App() {
   const navigator = useNavigate()
-  // console.log(currentDate, date7DaysAgo)
+
 
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("jwt") !== null)
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false)
@@ -50,6 +52,10 @@ function App() {
   const [isCardsBlockVisible, setIsCardBlockVisible] = useState(false)
   const [isSearchErrorOccured, setIsSearchErrorOccured] = useState(false)
   const [isCardClicked, setIsCardClicked] = useState(false)
+  const [onSuccessReq, setOnSuccessReq] = useState(false)
+
+
+
 
 
 
@@ -92,12 +98,15 @@ function App() {
 
         const userArticles = await mainApi.handleGetSavedArticles(token)
         if (userArticles) {
+
           setSavedCardsData(userArticles)
         }
       }
       catch (e) {
+
         alert('something went wrong while receiving articles')
         console.log(e)
+
       }
     })()
   }, [isLoggedIn])
@@ -108,10 +117,13 @@ function App() {
       if (article) {
         const newSavedArticles = savedCardsData.filter((item) => item._id !== article._id)
         setSavedCardsData(newSavedArticles)
+
+        setOnSuccessReq(true)
       }
 
     }
     catch (e) {
+      setOnSuccessReq(false)
       alert('something went wrong while deleting card')
     }
   }
@@ -123,9 +135,11 @@ function App() {
       const savedArticle = await mainApi.handleSaveArticle(keyWord, title, text, date, source, link, image, token)
       if (savedArticle) {
         setSavedCardsData([savedArticle, ...savedCardsData])
+        setOnSuccessReq(true)
       }
     }
     catch (errorStatus) {
+      setOnSuccessReq(false)
       alert('something went wrong while save the article')
       console.log(errorStatus)
     }
@@ -180,6 +194,7 @@ function App() {
           setEmail('')
           setPassword('')
           setName('')
+
           return
         }
       }
@@ -266,6 +281,9 @@ function App() {
     setEmail('')
     setPassword('')
     setGlobalErrorMessage('')
+
+
+
   }
   function handleChangingForm() {
     setIsSignInOpen(!isSignInOpen)
@@ -348,6 +366,11 @@ function App() {
               onSave={handleSaveArticle}
               token={token}
               searchKeyWord={searchKeyWord}
+              onDelete={deleteArticle}
+              savedCardsData={savedCardsData}
+              onSuccessReq={onSuccessReq}
+              setOnSuccessReq={setOnSuccessReq}
+              setIsPopupWithFormOpen={setIsPopupWithFormOpen}
 
             />
 

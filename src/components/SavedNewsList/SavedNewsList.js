@@ -29,6 +29,7 @@ export function SavedNewsList({ onDelete, savedCardsData, isSaveArticlesPageIsOp
                     cardSubtitle={card.text}
                     cardCaption={card.source}
                     cardKeyWord={card.keyword}
+                    cardLink={card.link}
                     onDelete={onDelete}
                   />
                 )
