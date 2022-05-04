@@ -14,11 +14,11 @@ export function SearchForm({ onSubmit, setSearchKeyWord }) {
     }
   }, [isValid])
   return (
-    <form className='header__form' onSubmit={(e) => { onSubmit(e); resetForm() }} >
-      <input value={values.search || ''} onChange={(e) => { setSearchKeyWord(e.target.value); handleChange(e) }} type='text' name="search" className='header__input' placeholder='Enter topic' required minLength={2} />
+    <form className='form' onSubmit={(e) => { onSubmit(e); resetForm() }} >
+      <input value={values.search || ''} onChange={(e) => { setSearchKeyWord(e.target.value); handleChange(e) }} type='text' name="search" className='form__input' placeholder='Enter topic' required minLength={2} />
 
-      <button ref={button} className='header__button' type='submit'>Search</button>
-      <span id="input_type_searchWord-error" className="header__form-error-message">{errors.search}</span>
+      <button ref={button} className='form__button' type='submit'>Search</button>
+      <span id="input_type_searchWord-error" className="form__error-message">{errors.search}</span>
     </form>
   )
 }

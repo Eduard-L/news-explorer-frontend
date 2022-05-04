@@ -15,6 +15,8 @@ import mainApi from '../../utils/MainApi'
 import { currentDate, date7DaysAgo } from '../../utils/constants'
 import NewsApi from '../../utils/NewsApi';
 import uuid from 'react-uuid';
+import { Login } from '../Login/Login';
+import { Registration } from '../Registration/Registration';
 
 
 
@@ -373,31 +375,48 @@ function App() {
               setIsPopupWithFormOpen={setIsPopupWithFormOpen}
 
             />
+            {
+              isSignInOpen && !isSignUpOpen ?
+                <Login
+                  isOpen={isPopupWithFormOpen}
+                  onClose={closePopup}
+                  isSignUpOpen={isSignUpOpen}
+                  onClick={handleChangingForm}
+                  btnText={isSignInOpen ? 'Sign In' : 'Sign up'}
+                  redirectText={isSignInOpen ? 'Sign up' : 'Sign In'}
+                  isSignInOpen={isSignInOpen}
+                  preSpanText='or'
+                  onSubmit={handlePopupFormSubmit}
+                  setEmail={setEmail}
+                  setPassword={setPassword}
+                  globalErrorMessage={globalErrorMessage}
+                  isFormLoading={isFormLoading}
+
+                /> :
+
+                <Registration
+                  isOpen={isPopupWithFormOpen}
+                  onClose={closePopup}
+                  isSignUpOpen={isSignUpOpen}
+                  onClick={handleChangingForm}
+                  btnText={isSignInOpen ? 'Sign In' : 'Sign up'}
+                  redirectText={isSignInOpen ? 'Sign up' : 'Sign In'}
+                  isSignInOpen={isSignInOpen}
+                  preSpanText='or'
+                  onSubmit={handlePopupFormSubmit}
+                  setName={setName}
+                  setEmail={setEmail}
+                  setPassword={setPassword}
+                  globalErrorMessage={globalErrorMessage}
+                  isFormLoading={isFormLoading}
+                />
+
+            }
 
 
 
 
-            <PopupWithForm
-              isOpen={isPopupWithFormOpen}
-              onClose={closePopup}
-              isSignUpOpen={isSignUpOpen}
-              onClick={handleChangingForm}
-              btnText={isSignInOpen ? 'Sign In' : 'Sign up'}
-              redirectText={isSignInOpen ? 'Sign up' : 'Sign In'}
-              isSignInOpen={isSignInOpen}
-              type={isSignUpOpen ? 'signup' : 'signin'}
-              preSpanText='or'
-              onSubmit={handlePopupFormSubmit}
-              setName={setName}
-              setEmail={setEmail}
-              setPassword={setPassword}
-              name={name}
-              password={password}
-              email={email}
-              globalErrorMessage={globalErrorMessage}
-              isFormLoading={isFormLoading}
 
-            />
             <Popup
               redirectText='Sign In'
               type='message'
