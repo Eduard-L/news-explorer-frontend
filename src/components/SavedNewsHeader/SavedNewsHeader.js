@@ -1,10 +1,10 @@
 import './SavedNewsHeader.css'
 import { Navigation } from '../Navigation/Navigation'
 import { useContext, useEffect, useState } from 'react'
-import { userDataContext } from '../../contexts/UserInfoContext'
+import { UserDataContext } from '../../contexts/UserInfoContext'
 
 export function SavedNewsHeader({ savedCardsData, isLoggedIn, onClick, isBurgerMenuOpen, setIsBurgerMenuOpen, setIsBurgerMenuOpenisHomePageOpen, setIsHomePageOpen, isSaveArticlesPageIsOpen, setIsSaveArticlesPageIsOpen }) {
-  const userData = useContext(userDataContext)
+  const userData = useContext(UserDataContext)
   const [keyWordPhrase, setKeyWordPhrase] = useState('');
   useEffect(() => { // algoritm to set the keyword phrase
     if (!savedCardsData) return

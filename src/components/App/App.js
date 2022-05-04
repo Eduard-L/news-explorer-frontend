@@ -10,7 +10,7 @@ import { SavedNews } from '../SavedNews/SavedNews'
 import { PopupWithForm } from '../PopupWithForm/PopupWithForm';
 import { Popup } from '../Popup/Popup'
 import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
-import { userDataContext } from '../../contexts/UserInfoContext';
+import { UserDataContext } from '../../contexts/UserInfoContext';
 import mainApi from '../../utils/MainApi'
 import { currentDate, date7DaysAgo } from '../../utils/constants'
 import NewsApi from '../../utils/NewsApi';
@@ -327,7 +327,7 @@ function App() {
   return (
 
     <div className="App">
-      <userDataContext.Provider value={userData}>
+      <UserDataContext.Provider value={userData}>
         <Routes>
           <Route path='/' element={<>
             <Header
@@ -427,7 +427,7 @@ function App() {
           <Route path='*' element={<Navigate to='/' />} />
         </Routes>
         <Footer />
-      </userDataContext.Provider>
+      </UserDataContext.Provider>
     </div>
 
   );
