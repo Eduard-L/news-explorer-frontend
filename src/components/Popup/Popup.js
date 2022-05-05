@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import '../Popup/Popup.css'
-export function Popup({ text, isOpen, onClose, children, isSignUpOpen, type, redirectText, onClick, preSpanText }) {
+
+export function Popup({ text, isOpen, onClose, children, type, redirectText, onClick, preSpanText }) {
 
 
   useEffect(() => {

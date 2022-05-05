@@ -3,12 +3,12 @@ import buttonLogoWhite from '../../images/buttonLogo2.svg'
 import buttonLogoBlack from '../../images/logOutBlack.svg'
 import { useNavigate } from 'react-router'
 import { useContext } from 'react'
-import { userDataContext } from '../../contexts/UserInfoContext'
+import { UserDataContext } from '../../contexts/UserInfoContext'
 
 
 export function Navigation({ userDataErr, isLoggedIn, onClick, isBurgerMenuOpen, setIsBurgerMenuOpen, isHomePageOpen, setIsHomePageOpen, isSaveArticlesPageIsOpen, setIsSaveArticlesPageIsOpen }) {
   const navigation = useNavigate()
-  const userData = useContext(userDataContext)
+  const userData = useContext(UserDataContext)
   function handleHomeBtnClick() {
     setIsHomePageOpen(true)
     setIsSaveArticlesPageIsOpen(false)

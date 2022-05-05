@@ -1,70 +1,40 @@
-# Getting Started with Create React App
+# Welcome to News Explorer Web App ![icons8-news-64](https://user-images.githubusercontent.com/87845853/166670657-63d94ba8-a5a1-4cc8-b604-e0028fdc9788.png)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Tech MERN Stack:![icons8-software-developer-64](https://user-images.githubusercontent.com/87845853/166670929-4957f5a5-b716-42e7-871e-7b9c7ac23b7c.png)
 
-In the project directory, you can run:
+* Front-End: | ReactJS | CSS | 
 
-### `npm start`
+* BackEnd: | NodeJS | Express | MongoDB |
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+* Host source: Gooogle Cloud 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+_______________________________________
 
-### `npm test`
+### User experience:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+ * In this app users able to search for articles by typing ש keyword and search without registration.
+ * Users can enter to some article by clicking on the card.
+* Those users who will register and login in will able to save & delete articles. 
+* Users who are logged in can save & delete articles both from the main page and from the saved-articles page.
+* Users who are logged in can leave the page and back to it without additional authorization.
+* Users can leave a page and their last search result will be saved.
 
-### `npm run build`
+__________________________________________
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### App functionality 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+* All forms in the app are validated using custom hook. 
+* The app using third side NewsAPi , see docs [here](https://newsapi.org/)
+* The app is fully responsive with all styles done in vanilla CSS.
+* The app using HOComponent to protect Routes from users that aren't logged in, done by React-Router v6
+* Authentication and authorization handled by backEnd, using Json Web token that generates and verifies the token.
+* The Saved Articles header returns a summary of the top keywords of the articles in descending order. Deleting cards will update this summary in real time.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+____________________________________________
 
-### `npm run eject`
+You can try it [here](https://news-searcher.students.nomoreparties.sbs)![icons8-finger-60](https://user-images.githubusercontent.com/87845853/166671383-ab9cfc92-d3a6-49c3-9bf9-6bbef540aadd.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+BackEnd code is [here](https://github.com/Eduard-L/news-explorer-api)![icons8-finger-60](https://user-images.githubusercontent.com/87845853/166671389-fcd307a3-171d-48f1-b7b8-d66605242eb4.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
