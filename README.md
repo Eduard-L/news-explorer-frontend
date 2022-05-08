@@ -13,7 +13,7 @@ _______________________________________
 
 ### User experience:
 
- * In this app users able to search for articles by typing ש keyword and search without registration.
+ * In this app users able to search for articles by typing keyword and search without registration.
  * Users can enter to some article by clicking on the card.
 * Those users who will register and login in will able to save & delete articles. 
 * Users who are logged in can save & delete articles both from the main page and from the saved-articles page.
