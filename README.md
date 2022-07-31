@@ -33,7 +33,7 @@ __________________________________________
 
 ____________________________________________
 
-You can try it [here](https://news-searcher.students.nomoreparties.sbs)![icons8-finger-60](https://user-images.githubusercontent.com/87845853/166671383-ab9cfc92-d3a6-49c3-9bf9-6bbef540aadd.png)
+You can try it [here](https://news-searcher.students.nomoredomainssbs.ru)![icons8-finger-60](https://user-images.githubusercontent.com/87845853/166671383-ab9cfc92-d3a6-49c3-9bf9-6bbef540aadd.png)
 
 
 BackEnd code is [here](https://github.com/Eduard-L/news-explorer-api)![icons8-finger-60](https://user-images.githubusercontent.com/87845853/166671389-fcd307a3-171d-48f1-b7b8-d66605242eb4.png)
